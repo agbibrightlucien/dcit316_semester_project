@@ -1,6 +1,6 @@
 # Interpretation of results
 
-Auto-generated from the actual pipeline output (`scripts/run_full_analysis.py`) -- numbers below are read directly from `results_table.csv`, not estimated by hand. This is a technical summary for the paper draft, not the paper text itself.
+This is my written summary of the results. The numbers below are read directly from results_table.csv, not estimated by hand. This is a technical summary I used while writing the paper, not the paper text itself.
 
 ## Dataset
 
@@ -60,7 +60,7 @@ SNAP ego-Facebook: 4039 nodes, 88234 edges, average degree 43.69, density 0.0108
 
 ## Notable / surprising findings
 
-The following (method, model, budget) combinations matched or **exceeded** greedy's Monte Carlo spread estimate. This can genuinely happen because both numbers are Monte Carlo estimates with sampling variance (see `MC_RUNS` in `scripts/run_full_analysis.py`), or because greedy is optimizing on its own internal live-edge sample while the table's spread column re-evaluates every method on a fresh, independent MC sample for fairness -- it is not silently smoothed over here and is worth a sentence in the paper's discussion/limitations:
+The following (method, model, budget) combinations matched or **exceeded** greedy's Monte Carlo spread estimate. This can genuinely happen because both numbers are Monte Carlo estimates with sampling variance (see `MC_RUNS` in `scripts/run_full_analysis.py`), or because greedy is optimizing on its own internal live-edge sample while the table's spread column re-evaluates every method on a fresh, independent MC sample for fairness, it is not silently smoothed over here and is worth a sentence in the paper's discussion/limitations:
 
 - degree / IC / k=10: 101.9% of greedy's spread
 - degree / LT / k=5: 100.0% of greedy's spread
@@ -69,5 +69,5 @@ The following (method, model, budget) combinations matched or **exceeded** greed
 ## Suggested connections to cited literature (for the paper, not filled in here)
 
 - The efficiency-vs-quality tradeoff shown in `efficiency_chart.png` is exactly the motivation for scalable/heuristic influence maximization follow-up work after Kempe, Kleinberg & Tardos (2003); this is the place in the paper to cite such follow-ups.
-- The CELF (lazy-forward) optimization used to make greedy tractable here (see `src/seed_selection.py` module docstring) is from Leskovec et al. (2007), 'Cost-effective Outbreak Detection in Networks' -- cite it specifically for the greedy implementation, not just KKT (2003).
-- Runtime for centrality heuristics is dominated by a one-time ranking computation and barely changes with budget k, while greedy's runtime scales with k -- this contrast is worth a sentence discussing why heuristics are attractive specifically under tight compute budgets, independent of how small k is.
+- The CELF (lazy-forward) optimization used to make greedy tractable here (see `src/seed_selection.py` module docstring) is from Leskovec et al. (2007), 'Cost-effective Outbreak Detection in Networks', cite it specifically for the greedy implementation, not just KKT (2003).
+- Runtime for centrality heuristics is dominated by a one-time ranking computation and barely changes with budget k, while greedy's runtime scales with k. This contrast is worth a sentence discussing why heuristics are attractive specifically under tight compute budgets, independent of how small k is.

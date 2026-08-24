@@ -1,10 +1,10 @@
 """Monte Carlo expected-spread estimation and timing utilities.
 
-All spread estimates in this project are Monte Carlo averages over a fixed
+All spread estimates in my analysis are Monte Carlo averages over a fixed
 number of diffusion simulations (``mc_runs``), using a fixed random seed for
 reproducibility. This module is the single place where that estimate is
 computed, so every seed-selection method (greedy and all heuristics) is
-scored with exactly the same evaluation procedure -- an apples-to-apples
+scored with exactly the same evaluation procedure, an apples-to-apples
 comparison.
 """
 

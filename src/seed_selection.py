@@ -1,29 +1,29 @@
-"""Seed selection methods compared in this study.
+"""Seed selection methods compared in my analysis.
 
 - greedy_seeds: the KKT (Kempe, Kleinberg & Tardos 2003) greedy algorithm,
   accelerated with the CELF (Cost-Effective Lazy Forward) lazy-evaluation
   optimization of Leskovec et al. (2007), "Cost-effective Outbreak Detection
   in Networks" (KDD '07). CELF provably returns the *identical* seed set as
   naive greedy (it exploits submodularity to skip marginal-gain
-  recomputations that cannot change the next pick) -- it is a performance
+  recomputations that cannot change the next pick), it is a performance
   optimization, not an approximation. This is what makes running true
   greedy, with Monte Carlo spread estimation, tractable on a ~4,000-node
-  graph within the project timeline.
+  graph within my timeline.
 - Greedy is also *incremental*: because it adds one node at a time in
   strictly decreasing marginal-gain order, the first k nodes it picks when
   targeting budget k=50 are exactly the seed set it would have picked if
   run directly for any smaller budget k' < 50 (same random live-edge
   graphs). So greedy is run once up to the largest budget, and smaller
-  budgets are read off as prefixes -- this is a correctness-preserving
+  budgets are read off as prefixes. This is a correctness-preserving
   performance optimization, not a shortcut around the algorithm.
 - Centrality heuristics (degree, PageRank, betweenness, eigenvector) each
   compute one ranking of all nodes; top-k seed sets for every budget are
   read off as prefixes of that single ranking, for the same reason.
 - Betweenness centrality: exact betweenness (Brandes' algorithm) was timed
-  at ~86 seconds on this graph (4,039 nodes / 88,234 edges), which is
-  affordable, so it is computed exactly rather than via sampling. The
+  at ~86 seconds on this graph (4,039 nodes / 88,234 edges), which was
+  affordable, so I computed it exactly rather than via sampling. The
   ``sample_size`` parameter is kept so a sampled (approximate) estimator can
-  be substituted if this is ever re-run on a much larger graph.
+  be substituted if I ever re-run this on a much larger graph.
 """
 
 from __future__ import annotations
@@ -97,7 +97,7 @@ def greedy_seeds_incremental(
     # Cache each node's single-source reachable set per live-edge graph.
     # Reachability is monotone under set union of sources, so this cache is
     # all that is ever needed to score any candidate against any partial
-    # seed set -- no repeated cascade simulation during selection.
+    # seed set, no repeated cascade simulation during selection.
     nodes = list(graph.nodes())
     reach_cache = {v: [reachable_from(lg, [v]) for lg in live_graphs] for v in nodes}
 

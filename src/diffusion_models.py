@@ -3,12 +3,12 @@
 Both models follow Kempe, Kleinberg & Tardos (2003), "Maximizing the Spread
 of Influence through a Social Network" (KDD '03).
 
-Implementation note (important for readers of the paper):
+Note:
 Both IC and LT have an equivalent "live-edge graph" formulation (KKT 2003,
 Theorem 2.2 / Sec. 4): a single stochastic simulation of either diffusion
 process is exactly equivalent to (a) sampling a random subgraph of "live"
 edges once, then (b) computing which nodes are reachable from the seed set
-in that subgraph via a plain BFS. This module implements diffusion via that
+in that subgraph via a plain BFS. I implemented diffusion via that
 equivalence, because it lets the same sampled live-edge graph be reused
 across many marginal-gain evaluations during greedy seed selection
 (instead of re-simulating the whole cascade from scratch every time), which

@@ -254,10 +254,9 @@ def write_interpretation(df: pd.DataFrame, graph_stats: dict) -> None:
     lines = []
     lines.append("# Interpretation of results\n")
     lines.append(
-        "Auto-generated from the actual pipeline output "
-        "(`scripts/run_full_analysis.py`) -- numbers below are read directly "
-        "from `results_table.csv`, not estimated by hand. This is a technical "
-        "summary for the paper draft, not the paper text itself.\n"
+        "This is my written summary of the results. The numbers below are read directly "
+        "from results_table.csv, not estimated by hand. This is a technical summary "
+        "I used while writing the paper, not the paper text itself.\n"
     )
 
     lines.append("## Dataset\n")
@@ -291,7 +290,7 @@ def write_interpretation(df: pd.DataFrame, graph_stats: dict) -> None:
             "variance (see `MC_RUNS` in `scripts/run_full_analysis.py`), or because "
             "greedy is optimizing on its own internal live-edge sample while the "
             "table's spread column re-evaluates every method on a fresh, "
-            "independent MC sample for fairness -- it is not silently smoothed "
+            "independent MC sample for fairness, it is not silently smoothed "
             "over here and is worth a sentence in the paper's discussion/limitations:\n"
         )
         for _, r in flagged.iterrows():
@@ -310,10 +309,10 @@ def write_interpretation(df: pd.DataFrame, graph_stats: dict) -> None:
         "Kempe, Kleinberg & Tardos (2003); this is the place in the paper to cite such follow-ups.\n"
         "- The CELF (lazy-forward) optimization used to make greedy tractable here "
         "(see `src/seed_selection.py` module docstring) is from Leskovec et al. (2007), "
-        "'Cost-effective Outbreak Detection in Networks' -- cite it specifically for the "
+        "'Cost-effective Outbreak Detection in Networks', cite it specifically for the "
         "greedy implementation, not just KKT (2003).\n"
         "- Runtime for centrality heuristics is dominated by a one-time ranking computation "
-        "and barely changes with budget k, while greedy's runtime scales with k -- this "
+        "and barely changes with budget k, while greedy's runtime scales with k. This "
         "contrast is worth a sentence discussing why heuristics are attractive specifically "
         "under tight compute budgets, independent of how small k is.\n"
     )
